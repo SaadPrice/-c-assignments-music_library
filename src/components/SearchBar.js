@@ -1,15 +1,34 @@
-                
-        import { useState } from 'react'
-        function SearchBar(props) {
-            let [searchTerm, setSearchTerm] = useState('')
+import React, { useState } from 'react';
 
-            return (
-                <form>
-                    <input type="text" placeholder="Enter a search term here" />
-                    <input type="submit" />
-                </form>
-            )
-        }
+function SearchBar({ handleSearch }) {
+    // State variable for managing search input
+    const [query, setQuery] = useState('');
 
-        export default SearchBar
+    // Function to handle search input change
+    const handleChange = (event) => {
+        setQuery(event.target.value);
+    };
+
+    // Function to handle form submission
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        handleSearch(query);
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                value={query}
+                onChange={handleChange}
+                placeholder="Search for music..."
+            />
+            <button type="submit">Search</button>
+        </form>
+    );
+}
+
+export default SearchBar;
+
+
     
